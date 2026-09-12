@@ -51,8 +51,8 @@ namespace SvjetskoPrvenstvoPobjedeForm
             if(firstMatch != null)
             {
                 var teamStats = firstMatch.HomeTeam.Code == repCode ? firstMatch.HomeTeamStatistics : firstMatch.AwayTeamStatistics;
-                players.AddRange(teamStats.StartingEleven);
-                players.AddRange(teamStats.Substitutes);
+                players.AddRange(teamStats.StartingEleven.Select(s => new Player { Name = s.Name, Captain = s.Captain, ShirtNumber = (int)s.ShirtNumber, Position = s.Position.ToString() }));
+                players.AddRange(teamStats.Substitutes.Select(s => new Player { Name = s.Name, Captain = s.Captain, ShirtNumber = (int)s.ShirtNumber, Position = s.Position.ToString() }));
             }
             //
             cbRepresentation.DataSource = teams;
