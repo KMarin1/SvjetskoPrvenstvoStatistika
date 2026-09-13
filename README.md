@@ -1,7 +1,7 @@
 # SvjetskoPrvenstvoStatistika
 
 Desktop app for browsing World Cup results — pick a championship and a team, and see the
-squad and match statistics. University project (TVZ, Object-Oriented Programming).
+squad and match statistics. University project (Algebra, Object-Oriented Programming).
 
 ## Stack
 
