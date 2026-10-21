@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http;
 using System.Windows.Forms;
+using PodatkovniSloj;
 
 namespace SvjetskoPrvenstvoPobjedeForm
 {
@@ -12,7 +14,13 @@ namespace SvjetskoPrvenstvoPobjedeForm
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            using var httpClient = new HttpClient
+            {
+                BaseAddress = ApiService.DefaultBaseAddress,
+                Timeout = ApiService.DefaultTimeout,
+            };
+            Application.Run(new Form1(new ApiService(httpClient)));
         }
     }
 }

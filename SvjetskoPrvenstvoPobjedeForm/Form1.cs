@@ -14,11 +14,11 @@ namespace SvjetskoPrvenstvoPobjedeForm
         string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Config", "config.txt");
         private readonly ConfigService configService = new ConfigService();
         private Dictionary<string, string> config;
-        private readonly ApiService apiService = new ApiService();
-        public Form1()
+        private readonly IWorldCupDataSource apiService;
+        public Form1(IWorldCupDataSource apiService)
         {
             InitializeComponent();
-            
+            this.apiService = apiService;
         }
         private async void Form1_Load(object sender, EventArgs e)
         {
@@ -42,9 +42,14 @@ namespace SvjetskoPrvenstvoPobjedeForm
             string championship = config.ContainsKey("championshiptype") ? config["championshiptype"].ToLower() : null;
             string culture = config.ContainsKey("culture") ? config["culture"].ToLower() : null;
 
-            var teams = await apiService.GetTeamsAsync(championship);
-            var matches = await apiService.GetMatchesAsync(championship);
-            var repCode = config["representation"];
+            if (!ChampionshipExtensions.TryParseApiName(championship, out var selectedChampionship))
+            {
+                selectedChampionship = Championship.Men;
+            }
+
+            var teams = await apiService.GetTeamsAsync(selectedChampionship);
+            var matches = await apiService.GetMatchesAsync(selectedChampionship);
+            config.TryGetValue("representation", out var repCode);
             var firstMatch = matches.FirstOrDefault(m => m.HomeTeam.Code == repCode || m.AwayTeam.Code == repCode);
             var players = new List<Player>();
 
