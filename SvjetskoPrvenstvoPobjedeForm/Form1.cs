@@ -5,51 +5,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 namespace SvjetskoPrvenstvoPobjedeForm
 {
     public partial class Form1 : Form
     {
-        string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Config", "config.txt");
-        private readonly ConfigService configService = new ConfigService();
-        private Dictionary<string, string> config;
+        private readonly ConfigService configService;
+        private UserSettings settings = UserSettings.Default;
         private readonly IWorldCupDataSource apiService;
-        public Form1(IWorldCupDataSource apiService)
+        public Form1(IWorldCupDataSource apiService, ConfigService configService)
         {
             InitializeComponent();
             this.apiService = apiService;
+            this.configService = configService;
         }
         private async void Form1_Load(object sender, EventArgs e)
         {
-
-            var allowedCultures = new[] { "hr", "en" };
-            var allowedChampionShipTypes = new[] { "men", "women" };
-            ddlCulture.DataSource = allowedCultures.ToList();
-            ddlChampionshipType.DataSource = allowedChampionShipTypes.ToList();
-
+            ddlCulture.DataSource = UserSettings.SupportedCultures.ToList();
+            ddlChampionshipType.DataSource = Enum.GetValues<Championship>().Select(c => c.ToApiName()).ToList();
 
             try
             {
-                config = configService.LoadConfig(configPath);
+                settings = configService.Load();
             }
-            catch (Exception)
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
             {
                 MessageBox.Show($"Kriva putanja 'config.txt'");
-                config = new Dictionary<string, string>();
             }
 
-            string championship = config.ContainsKey("championshiptype") ? config["championshiptype"].ToLower() : null;
-            string culture = config.ContainsKey("culture") ? config["culture"].ToLower() : null;
-
-            if (!ChampionshipExtensions.TryParseApiName(championship, out var selectedChampionship))
-            {
-                selectedChampionship = Championship.Men;
-            }
-
-            var teams = await apiService.GetTeamsAsync(selectedChampionship);
-            var matches = await apiService.GetMatchesAsync(selectedChampionship);
-            config.TryGetValue("representation", out var repCode);
+            var teams = await apiService.GetTeamsAsync(settings.Championship);
+            var matches = await apiService.GetMatchesAsync(settings.Championship);
+            var repCode = settings.Representation;
             var firstMatch = matches.FirstOrDefault(m => m.HomeTeam.Code == repCode || m.AwayTeam.Code == repCode);
             var players = new List<Player>();
 
@@ -63,33 +49,25 @@ namespace SvjetskoPrvenstvoPobjedeForm
             cbRepresentation.DataSource = teams;
             //
 
-            if (config.ContainsKey("representation"))
-            {
-                string fifacode = config["representation"];
-                var team = teams.FirstOrDefault(t => t.FifaCode.Equals(fifacode, StringComparison.OrdinalIgnoreCase));
-                if(team != null)
-                    cbRepresentation.SelectedItem = team;
-            }
+            var team = teams.FirstOrDefault(t => string.Equals(t.FifaCode, repCode, StringComparison.OrdinalIgnoreCase));
+            if (team != null)
+                cbRepresentation.SelectedItem = team;
 
-            if (championship != null && allowedChampionShipTypes.Contains(championship))
-            {
-                ddlChampionshipType.SelectedItem = championship.ToLower(); 
-            }
-            if (culture != null && allowedCultures.Contains(culture))
-            {
-                ddlCulture.SelectedItem = culture; 
-            }
-
-
+            ddlChampionshipType.SelectedItem = settings.Championship.ToApiName();
+            ddlCulture.SelectedItem = settings.Culture;
         }
 
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            config["championshiptype"] = ddlChampionshipType.SelectedItem?.ToString();
-            config["culture"] = (ddlCulture.SelectedItem).ToString();
-            config["representation"] = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode;
-            configService.SaveConfig(config, configPath);            
+            ChampionshipExtensions.TryParseApiName(ddlChampionshipType.SelectedItem as string, out var championship);
+            settings = settings with
+            {
+                Championship = championship,
+                Culture = (string)ddlCulture.SelectedItem,
+                Representation = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode,
+            };
+            configService.Save(settings);
             MessageBox.Show("Postavke su spremljene.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

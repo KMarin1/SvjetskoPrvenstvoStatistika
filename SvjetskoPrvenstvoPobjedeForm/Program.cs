@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Windows.Forms;
 using PodatkovniSloj;
+using PodatkovniSloj.Config;
 
 namespace SvjetskoPrvenstvoPobjedeForm
 {
@@ -20,7 +21,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
                 BaseAddress = ApiService.DefaultBaseAddress,
                 Timeout = ApiService.DefaultTimeout,
             };
-            Application.Run(new Form1(new ApiService(httpClient)));
+            Application.Run(new Form1(new ApiService(httpClient), new ConfigService(ConfigService.DefaultFilePath)));
         }
     }
 }

@@ -1,2 +1,0 @@
-championshiptype=men
-culture=hr
