@@ -51,8 +51,8 @@ namespace SvjetskoPrvenstvoPobjedeForm
             if(firstMatch != null)
             {
                 var teamStats = firstMatch.HomeTeam.Code == repCode ? firstMatch.HomeTeamStatistics : firstMatch.AwayTeamStatistics;
-                players.AddRange(teamStats.StartingEleven.Select(s => new Player { Name = s.Name, Captain = s.Captain, ShirtNumber = (int)s.ShirtNumber, Position = s.Position.ToString() }));
-                players.AddRange(teamStats.Substitutes.Select(s => new Player { Name = s.Name, Captain = s.Captain, ShirtNumber = (int)s.ShirtNumber, Position = s.Position.ToString() }));
+                players.AddRange(teamStats.StartingEleven);
+                players.AddRange(teamStats.Substitutes);
             }
             //
             cbRepresentation.DataSource = teams;
@@ -83,7 +83,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
         {
             config["championshiptype"] = ddlChampionshipType.SelectedItem?.ToString();
             config["culture"] = (ddlCulture.SelectedItem).ToString();
-            config["representation"] = (cbRepresentation.SelectedItem)?.ToString();
+            config["representation"] = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode;
             configService.SaveConfig(config, configPath);            
             MessageBox.Show("Postavke su spremljene.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

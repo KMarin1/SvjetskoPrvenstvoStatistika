@@ -21,7 +21,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
             Player = player;
             Favorite = favorite;
             lblIme.Text = $"{player.Name} ({player.ShirtNumber})";
-            lblPozicija.Text = player.Position;
+            lblPozicija.Text = player.Position.ToString();
             lblKapetan.Visible = player.Captain;
             pbZvjezdica.Visible = favorite;
 

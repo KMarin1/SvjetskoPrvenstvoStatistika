@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Config\config.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

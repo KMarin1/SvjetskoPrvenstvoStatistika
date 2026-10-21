@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PodatkovniSloj.Models;
 
-namespace PodatkovniSloj.Models
+/// <summary>A player in a match line-up (<c>starting_eleven</c> or <c>substitutes</c>).</summary>
+public sealed record Player
 {
-    public class Player
-    {
-        public string Name { get; set; }
-        public string Position { get; set; }
-        public int ShirtNumber { get; set; }
-        public bool Captain { get; set; }
-        public bool Favorite { get; set; }
-    }
+    public required string Name { get; init; }
+
+    public bool Captain { get; init; }
+
+    public int ShirtNumber { get; init; }
+
+    public Position Position { get; init; }
 }
