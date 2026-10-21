@@ -25,6 +25,7 @@ internal sealed partial class MainForm : Form
         _settings = settings;
         _configService = configService;
         _dataSource = dataSource;
+        cbRepresentation.DisplayMember = nameof(TeamResult.DisplayName);
         ddlChampionshipType.Format += (_, e) =>
         {
             if (e.ListItem is Championship championship)
@@ -140,7 +141,8 @@ internal sealed partial class MainForm : Form
         }
         catch (WorldCupDataException ex)
         {
-            cbRepresentation.DataSource = null;
+            // Empty, not null: a null DataSource makes the ComboBox forget its DisplayMember.
+            cbRepresentation.DataSource = Array.Empty<TeamResult>();
             ShowError(Strings.GreskaUcitavanja, ex);
         }
 

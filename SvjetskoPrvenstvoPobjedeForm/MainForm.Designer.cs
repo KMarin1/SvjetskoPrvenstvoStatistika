@@ -75,14 +75,12 @@
             //
             // cbRepresentation
             //
-            this.cbRepresentation.DisplayMember = "DisplayName";
             this.cbRepresentation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRepresentation.FormattingEnabled = true;
             this.cbRepresentation.Location = new System.Drawing.Point(204, 43);
             this.cbRepresentation.Name = "cbRepresentation";
             this.cbRepresentation.Size = new System.Drawing.Size(180, 21);
             this.cbRepresentation.TabIndex = 5;
-            this.cbRepresentation.ValueMember = "FifaCode";
             //
             // lblRepresentation
             //
