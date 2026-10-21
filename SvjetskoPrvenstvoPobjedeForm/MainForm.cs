@@ -1,6 +1,7 @@
 ﻿using PodatkovniSloj;
 using PodatkovniSloj.Config;
 using PodatkovniSloj.Models;
+using SvjetskoPrvenstvoPobjedeForm.Properties;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
             this.settings = settings;
             this.apiService = apiService;
             this.configService = configService;
+            ApplyTexts();
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -47,7 +49,19 @@ namespace SvjetskoPrvenstvoPobjedeForm
                 Representation = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode,
             };
             configService.Save(settings);
-            MessageBox.Show("Postavke su spremljene.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UiCulture.Apply(settings.Culture);
+            ApplyTexts();
+            MessageBox.Show(Strings.PostavkeSpremljene, Strings.Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>Sets every visible text from the resources of the current UI culture.</summary>
+        private void ApplyTexts()
+        {
+            Text = Strings.Naslov;
+            lblCulture.Text = Strings.Jezik;
+            lblChampionshipType.Text = Strings.Prvenstvo;
+            lblRepresentation.Text = Strings.Reprezentacija;
+            btnSubmit.Text = Strings.Spremi;
         }
     }
 }

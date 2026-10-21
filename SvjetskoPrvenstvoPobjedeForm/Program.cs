@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Windows.Forms;
 using PodatkovniSloj;
 using PodatkovniSloj.Config;
+using SvjetskoPrvenstvoPobjedeForm.Properties;
 
 namespace SvjetskoPrvenstvoPobjedeForm
 {
@@ -19,6 +20,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
 
             var configService = new ConfigService(ConfigService.DefaultFilePath);
             var settings = LoadSettings(configService);
+            UiCulture.Apply(settings.Culture);
 
             using var httpClient = new HttpClient
             {
@@ -37,7 +39,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
             }
             catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
             {
-                MessageBox.Show($"Kriva putanja 'config.txt'");
+                MessageBox.Show(Strings.KrivaPutanjaKonfiguracije);
                 return UserSettings.Default;
             }
         }

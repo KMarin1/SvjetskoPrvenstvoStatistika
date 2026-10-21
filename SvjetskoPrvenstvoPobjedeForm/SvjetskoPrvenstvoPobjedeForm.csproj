@@ -6,10 +6,22 @@
     <UseWindowsForms>true</UseWindowsForms>
     <!-- The .NET Framework default UI font, so the designer layout keeps the size it was drawn at. -->
     <ApplicationDefaultFont>Microsoft Sans Serif, 8.25pt</ApplicationDefaultFont>
+    <!-- Croatian text lives in the main assembly; English ships as a satellite assembly. -->
+    <NeutralLanguage>hr</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PodatkovniSloj\PodatkovniSloj.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The Strings class is generated from the .resx at build time, so it cannot go stale. -->
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <StronglyTypedFileName>$(IntermediateOutputPath)Strings.Designer.cs</StronglyTypedFileName>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+      <StronglyTypedNamespace>SvjetskoPrvenstvoPobjedeForm.Properties</StronglyTypedNamespace>
+      <StronglyTypedClassName>Strings</StronglyTypedClassName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

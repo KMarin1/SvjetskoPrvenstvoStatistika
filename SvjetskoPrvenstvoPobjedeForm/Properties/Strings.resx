@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- UI text in Croatian, the neutral language. English is in Strings.en.resx. -->
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Naslov" xml:space="preserve">
+    <value>Svjetsko prvenstvo</value>
+  </data>
+  <data name="Jezik" xml:space="preserve">
+    <value>Jezik</value>
+  </data>
+  <data name="Prvenstvo" xml:space="preserve">
+    <value>Prvenstvo</value>
+  </data>
+  <data name="Reprezentacija" xml:space="preserve">
+    <value>Reprezentacija</value>
+  </data>
+  <data name="Spremi" xml:space="preserve">
+    <value>Spremi</value>
+  </data>
+  <data name="PostavkeSpremljene" xml:space="preserve">
+    <value>Postavke su spremljene.</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="KrivaPutanjaKonfiguracije" xml:space="preserve">
+    <value>Kriva putanja 'config.txt'</value>
+  </data>
+</root>
