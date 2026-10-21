@@ -37,4 +37,16 @@
   <data name="KrivaPutanjaKonfiguracije" xml:space="preserve">
     <value>Invalid path 'config.txt'</value>
   </data>
+  <data name="Greska" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="GreskaUcitavanja" xml:space="preserve">
+    <value>The national teams could not be loaded.</value>
+  </data>
+  <data name="GreskaSpremanja" xml:space="preserve">
+    <value>The settings could not be saved.</value>
+  </data>
+  <data name="NeocekivanaGreska" xml:space="preserve">
+    <value>An unexpected error occurred.</value>
+  </data>
 </root>

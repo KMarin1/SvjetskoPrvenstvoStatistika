@@ -11,6 +11,14 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
+        // Last line of defence: an error nobody expected is reported and the application keeps running.
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+        Application.ThreadException += (_, e) => MessageBox.Show(
+            $"{Strings.NeocekivanaGreska}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}",
+            Strings.Greska,
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error);
+
         var configService = new ConfigService(ConfigService.DefaultFilePath);
         var settings = LoadSettings(configService);
         UiCulture.Apply(settings.Culture);

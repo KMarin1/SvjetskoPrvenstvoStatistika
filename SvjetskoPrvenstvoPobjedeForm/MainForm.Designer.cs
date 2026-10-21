@@ -7,19 +7,6 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -35,6 +22,7 @@
             this.lblCulture = new System.Windows.Forms.Label();
             this.cbRepresentation = new System.Windows.Forms.ComboBox();
             this.lblRepresentation = new System.Windows.Forms.Label();
+            this.pbLoading = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             //
             // ddlCulture
@@ -105,11 +93,22 @@
             this.lblRepresentation.TabIndex = 6;
             this.lblRepresentation.Text = "Reprezentacija";
             //
+            // pbLoading
+            //
+            this.pbLoading.Location = new System.Drawing.Point(204, 70);
+            this.pbLoading.MarqueeAnimationSpeed = 30;
+            this.pbLoading.Name = "pbLoading";
+            this.pbLoading.Size = new System.Drawing.Size(180, 12);
+            this.pbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pbLoading.TabIndex = 7;
+            this.pbLoading.Visible = false;
+            //
             // MainForm
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 150);
+            this.Controls.Add(this.pbLoading);
             this.Controls.Add(this.lblRepresentation);
             this.Controls.Add(this.cbRepresentation);
             this.Controls.Add(this.lblCulture);
@@ -134,5 +133,6 @@
         private System.Windows.Forms.Label lblCulture;
         private System.Windows.Forms.ComboBox cbRepresentation;
         private System.Windows.Forms.Label lblRepresentation;
+        private System.Windows.Forms.ProgressBar pbLoading;
     }
 }

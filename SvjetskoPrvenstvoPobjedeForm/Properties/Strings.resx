@@ -37,4 +37,16 @@
   <data name="KrivaPutanjaKonfiguracije" xml:space="preserve">
     <value>Kriva putanja 'config.txt'</value>
   </data>
+  <data name="Greska" xml:space="preserve">
+    <value>Greška</value>
+  </data>
+  <data name="GreskaUcitavanja" xml:space="preserve">
+    <value>Reprezentacije se nisu mogle učitati.</value>
+  </data>
+  <data name="GreskaSpremanja" xml:space="preserve">
+    <value>Postavke se nisu mogle spremiti.</value>
+  </data>
+  <data name="NeocekivanaGreska" xml:space="preserve">
+    <value>Dogodila se neočekivana greška.</value>
+  </data>
 </root>
