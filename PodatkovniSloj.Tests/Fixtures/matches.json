@@ -1,0 +1,193 @@
+[
+  {
+    "venue": "Nizhny Novgorod",
+    "location": "Nizhny Novgorod Stadium",
+    "status": "completed",
+    "time": "full-time",
+    "fifa_id": "300331524",
+    "weather": {
+      "humidity": "50",
+      "temp_celsius": "22",
+      "temp_farenheit": "72",
+      "wind_speed": "8",
+      "description": "Sunny"
+    },
+    "attendance": "43319",
+    "officials": ["Ravshan IRMATOV", "Abdukhamidullo RASULOV"],
+    "stage_name": "First stage",
+    "home_team_country": "Argentina",
+    "away_team_country": "Croatia",
+    "datetime": "2018-06-21T18:00:00Z",
+    "winner": "Croatia",
+    "winner_code": "CRO",
+    "home_team": { "country": "Argentina", "code": "ARG", "goals": 0, "penalties": 0 },
+    "away_team": { "country": "Croatia", "code": "CRO", "goals": 3, "penalties": 0 },
+    "home_team_events": [
+      { "id": 101, "type_of_event": "yellow-card", "player": "Marcos ACUNA", "time": "35'" }
+    ],
+    "away_team_events": [
+      { "id": 201, "type_of_event": "goal", "player": "Ante REBIC", "time": "53'" },
+      { "id": 202, "type_of_event": "goal", "player": "Luka MODRIC", "time": "80'" },
+      { "id": 203, "type_of_event": "yellow-card", "player": "Mario MANDZUKIC", "time": "57'" },
+      { "id": 204, "type_of_event": "yellow-card-second", "player": "Mario MANDZUKIC", "time": "88'" },
+      { "id": 205, "type_of_event": "goal", "player": "Ivan RAKITIC", "time": "90'+1'" },
+      { "id": 206, "type_of_event": "goal-own", "player": "Dejan LOVREN", "time": "90'+3'" }
+    ],
+    "home_team_statistics": {
+      "country": "Argentina",
+      "attempts_on_goal": 10,
+      "on_target": 3,
+      "off_target": 4,
+      "blocked": 3,
+      "woodwork": 0,
+      "corners": 3,
+      "offsides": 1,
+      "ball_possession": 58,
+      "pass_accuracy": 87,
+      "num_passes": 607,
+      "passes_completed": 528,
+      "distance_covered": 103,
+      "balls_recovered": 44,
+      "tackles": 11,
+      "clearances": 8,
+      "yellow_cards": 1,
+      "red_cards": 0,
+      "fouls_committed": 15,
+      "tactics": "3-4-3",
+      "starting_eleven": [
+        { "name": "Willy CABALLERO", "captain": false, "shirt_number": 23, "position": "Goalie" },
+        { "name": "Lionel MESSI", "captain": true, "shirt_number": 10, "position": "Forward" }
+      ],
+      "substitutes": [
+        { "name": "Gonzalo HIGUAIN", "captain": false, "shirt_number": 9, "position": "Forward" }
+      ]
+    },
+    "away_team_statistics": {
+      "country": "Croatia",
+      "attempts_on_goal": 12,
+      "on_target": 5,
+      "off_target": 5,
+      "blocked": 2,
+      "woodwork": 0,
+      "corners": 2,
+      "offsides": 0,
+      "ball_possession": 42,
+      "pass_accuracy": 81,
+      "num_passes": 435,
+      "passes_completed": 352,
+      "distance_covered": 107,
+      "balls_recovered": 45,
+      "tackles": 14,
+      "clearances": null,
+      "yellow_cards": 2,
+      "red_cards": 0,
+      "fouls_committed": null,
+      "tactics": "4-2-3-1",
+      "starting_eleven": [
+        { "name": "Danijel SUBASIC", "captain": false, "shirt_number": 23, "position": "Goalie" },
+        { "name": "Ivan PERISIC", "captain": false, "shirt_number": 4, "position": "Forward" }
+      ],
+      "substitutes": [
+        { "name": "Mateo KOVACIC", "captain": false, "shirt_number": 8, "position": "Midfield" }
+      ]
+    },
+    "last_event_update_at": "2018-06-22T09:51:21Z",
+    "last_score_update_at": null
+  },
+  {
+    "venue": "Kaliningrad",
+    "location": "Kaliningrad Stadium",
+    "status": "completed",
+    "time": "full-time",
+    "fifa_id": "300331509",
+    "weather": {
+      "humidity": "64",
+      "temp_celsius": "17",
+      "temp_farenheit": "63",
+      "wind_speed": "7",
+      "description": "Partly Cloudy Night"
+    },
+    "attendance": "31136",
+    "officials": ["Sandro RICCI"],
+    "stage_name": "First stage",
+    "home_team_country": "Croatia",
+    "away_team_country": "Nigeria",
+    "datetime": "2018-06-16T19:00:00Z",
+    "winner": "Croatia",
+    "winner_code": "CRO",
+    "home_team": { "country": "Croatia", "code": "CRO", "goals": 2, "penalties": 0 },
+    "away_team": { "country": "Nigeria", "code": "NGA", "goals": 0, "penalties": 0 },
+    "home_team_events": [
+      { "id": 301, "type_of_event": "goal-penalty", "player": "Luka MODRIC", "time": "71'" },
+      { "id": 302, "type_of_event": "yellow-card", "player": "Ante REBIC", "time": "40'" },
+      { "id": 303, "type_of_event": "substitution-out", "player": "Ante REBIC", "time": "78'" },
+      { "id": 304, "type_of_event": "substitution-in", "player": "Mateo KOVACIC", "time": "78'" },
+      { "id": 305, "type_of_event": "yellow-card", "player": "Sime VRSALJKO", "time": "86'" }
+    ],
+    "away_team_events": [
+      { "id": 401, "type_of_event": "goal-own", "player": "Oghenekaro ETEBO", "time": "32'" },
+      { "id": 402, "type_of_event": "yellow-card", "player": "William TROOST-EKONG", "time": "70'" },
+      { "id": 403, "type_of_event": "red-card", "player": "John Obi MIKEL", "time": "90'+4'" }
+    ],
+    "home_team_statistics": {
+      "country": "Croatia",
+      "attempts_on_goal": 15,
+      "on_target": 4,
+      "off_target": 6,
+      "blocked": 5,
+      "woodwork": 0,
+      "corners": 7,
+      "offsides": 2,
+      "ball_possession": 54,
+      "pass_accuracy": 82,
+      "num_passes": 512,
+      "passes_completed": 420,
+      "distance_covered": 104,
+      "balls_recovered": 48,
+      "tackles": 13,
+      "clearances": 14,
+      "yellow_cards": 2,
+      "red_cards": 0,
+      "fouls_committed": 12,
+      "tactics": "4-2-3-1",
+      "starting_eleven": [
+        { "name": "Danijel SUBASIC", "captain": false, "shirt_number": 23, "position": "Goalie" },
+        { "name": "Luka MODRIC", "captain": true, "shirt_number": 10, "position": "Midfield" }
+      ],
+      "substitutes": [
+        { "name": "Mateo KOVACIC", "captain": false, "shirt_number": 8, "position": "Midfield" }
+      ]
+    },
+    "away_team_statistics": {
+      "country": "Nigeria",
+      "attempts_on_goal": 9,
+      "on_target": 2,
+      "off_target": 5,
+      "blocked": 2,
+      "woodwork": 0,
+      "corners": 4,
+      "offsides": 0,
+      "ball_possession": 46,
+      "pass_accuracy": 79,
+      "num_passes": 437,
+      "passes_completed": 345,
+      "distance_covered": 103,
+      "balls_recovered": 47,
+      "tackles": 16,
+      "clearances": 22,
+      "yellow_cards": 1,
+      "red_cards": 1,
+      "fouls_committed": 16,
+      "tactics": "3-5-2",
+      "starting_eleven": [
+        { "name": "Francis UZOHO", "captain": false, "shirt_number": 23, "position": "Goalie" },
+        { "name": "John Obi MIKEL", "captain": true, "shirt_number": 10, "position": "Midfield" }
+      ],
+      "substitutes": [
+        { "name": "Odion IGHALO", "captain": false, "shirt_number": 9, "position": "Forward" }
+      ]
+    },
+    "last_event_update_at": "2018-06-17T08:12:44Z",
+    "last_score_update_at": "2018-06-16T21:00:12Z"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "id": 24,
+    "country": "Korea Republic",
+    "alternate_name": null,
+    "fifa_code": "KOR",
+    "group_id": 6,
+    "group_letter": "F",
+    "wins": 1,
+    "draws": 0,
+    "losses": 2,
+    "games_played": 3,
+    "points": 3,
+    "goals_for": 3,
+    "goals_against": 3,
+    "goal_differential": 0
+  },
+  {
+    "id": 13,
+    "country": "Croatia",
+    "alternate_name": "Hrvatska",
+    "fifa_code": "CRO",
+    "group_id": 4,
+    "group_letter": "D",
+    "wins": 4,
+    "draws": 2,
+    "losses": 1,
+    "games_played": 7,
+    "points": 14,
+    "goals_for": 14,
+    "goals_against": 9,
+    "goal_differential": 5
+  }
+]

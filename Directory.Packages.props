@@ -1,0 +1,12 @@
+<Project>
+
+  <!-- Central package management: every NuGet version is set here, once. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+  </ItemGroup>
+
+</Project>
