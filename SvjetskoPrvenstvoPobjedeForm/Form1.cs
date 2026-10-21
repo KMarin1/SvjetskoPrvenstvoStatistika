@@ -11,11 +11,12 @@ namespace SvjetskoPrvenstvoPobjedeForm
     public partial class Form1 : Form
     {
         private readonly ConfigService configService;
-        private UserSettings settings = UserSettings.Default;
+        private UserSettings settings;
         private readonly IWorldCupDataSource apiService;
-        public Form1(IWorldCupDataSource apiService, ConfigService configService)
+        public Form1(UserSettings settings, ConfigService configService, IWorldCupDataSource apiService)
         {
             InitializeComponent();
+            this.settings = settings;
             this.apiService = apiService;
             this.configService = configService;
         }
@@ -23,15 +24,6 @@ namespace SvjetskoPrvenstvoPobjedeForm
         {
             ddlCulture.DataSource = UserSettings.SupportedCultures.ToList();
             ddlChampionshipType.DataSource = Enum.GetValues<Championship>().Select(c => c.ToApiName()).ToList();
-
-            try
-            {
-                settings = configService.Load();
-            }
-            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
-            {
-                MessageBox.Show($"Kriva putanja 'config.txt'");
-            }
 
             var teams = await apiService.GetTeamsAsync(settings.Championship);
             var matches = await apiService.GetMatchesAsync(settings.Championship);

@@ -16,4 +16,13 @@ public sealed record UserSettings
 
     /// <summary>FIFA code of the chosen national team, or null before one is chosen.</summary>
     public string? Representation { get; init; }
+
+    /// <summary>Load data from the API or from saved JSON files. Set by editing the settings file.</summary>
+    public DataSourceKind DataSource { get; init; } = DataSourceKind.Api;
+
+    /// <summary>
+    /// Folder of the JSON files when <see cref="DataSource"/> is <see cref="DataSourceKind.JsonFiles"/>.
+    /// A relative path is resolved against the application folder.
+    /// </summary>
+    public string JsonDirectory { get; init; } = "data";
 }

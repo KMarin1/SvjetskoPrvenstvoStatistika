@@ -56,4 +56,9 @@ public sealed record Match
     public DateTimeOffset? LastEventUpdateAt { get; init; }
 
     public DateTimeOffset? LastScoreUpdateAt { get; init; }
+
+    /// <summary>Whether the team with this FIFA code played in the match. Case does not matter.</summary>
+    public bool Involves(string fifaCode) =>
+        string.Equals(HomeTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase)
+        || string.Equals(AwayTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase);
 }

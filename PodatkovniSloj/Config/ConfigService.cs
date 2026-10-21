@@ -9,6 +9,14 @@ public sealed class ConfigService
     private const string ChampionshipKey = "championshiptype";
     private const string CultureKey = "culture";
     private const string RepresentationKey = "representation";
+    private const string DataSourceKey = "datasource";
+    private const string JsonDirectoryKey = "jsondirectory";
+
+    private static readonly Dictionary<DataSourceKind, string> DataSourceNames = new()
+    {
+        [DataSourceKind.Api] = "api",
+        [DataSourceKind.JsonFiles] = "json",
+    };
 
     /// <param name="filePath">The settings file. Its folder is created on the first save.</param>
     public ConfigService(string filePath)
@@ -81,6 +89,7 @@ public sealed class ConfigService
         var culture = UserSettings.SupportedCultures.FirstOrDefault(
             supported => string.Equals(supported, values.GetValueOrDefault(CultureKey), StringComparison.OrdinalIgnoreCase));
         var representation = values.GetValueOrDefault(RepresentationKey);
+        var jsonDirectory = values.GetValueOrDefault(JsonDirectoryKey);
 
         return new UserSettings
         {
@@ -89,7 +98,22 @@ public sealed class ConfigService
                 : defaults.Championship,
             Culture = culture ?? defaults.Culture,
             Representation = string.IsNullOrEmpty(representation) ? null : representation.ToUpperInvariant(),
+            DataSource = ParseDataSource(values.GetValueOrDefault(DataSourceKey)) ?? defaults.DataSource,
+            JsonDirectory = string.IsNullOrEmpty(jsonDirectory) ? defaults.JsonDirectory : jsonDirectory,
         };
+    }
+
+    private static DataSourceKind? ParseDataSource(string? value)
+    {
+        foreach (var (kind, name) in DataSourceNames)
+        {
+            if (string.Equals(name, value, StringComparison.OrdinalIgnoreCase))
+            {
+                return kind;
+            }
+        }
+
+        return null;
     }
 
     private static IEnumerable<string> Format(UserSettings settings)
@@ -100,5 +124,8 @@ public sealed class ConfigService
         {
             yield return $"{RepresentationKey}={settings.Representation}";
         }
+
+        yield return $"{DataSourceKey}={DataSourceNames[settings.DataSource]}";
+        yield return $"{JsonDirectoryKey}={settings.JsonDirectory}";
     }
 }
