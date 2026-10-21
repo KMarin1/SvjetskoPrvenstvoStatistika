@@ -35,6 +35,17 @@ internal sealed partial class MainForm : Form
         ApplyTexts();
     }
 
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+        // Only ask the user; a Windows shutdown or Application.Exit closes without a prompt.
+        if (e.CloseReason == CloseReason.UserClosing && !Confirm(Strings.PotvrdaZatvaranja))
+        {
+            e.Cancel = true;
+        }
+
+        base.OnFormClosing(e);
+    }
+
     protected override void OnFormClosed(FormClosedEventArgs e)
     {
         _closing.Cancel();
@@ -65,7 +76,8 @@ internal sealed partial class MainForm : Form
     private async void btnSubmit_Click(object? sender, EventArgs e)
     {
         if (ddlChampionshipType.SelectedItem is not Championship championship
-            || ddlCulture.SelectedItem is not string culture)
+            || ddlCulture.SelectedItem is not string culture
+            || !Confirm(Strings.PotvrdaSpremanja))
         {
             return;
         }
@@ -141,6 +153,16 @@ internal sealed partial class MainForm : Form
         cbRepresentation.Enabled = !loading;
         btnSubmit.Enabled = !loading;
     }
+
+    /// <summary>Asks before acting. Enter confirms (OK is the default button) and Esc cancels.</summary>
+    private bool Confirm(string question) =>
+        MessageBox.Show(
+            this,
+            question,
+            Strings.Potvrda,
+            MessageBoxButtons.OKCancel,
+            MessageBoxIcon.Question,
+            MessageBoxDefaultButton.Button1) == DialogResult.OK;
 
     private void ShowError(string message, Exception exception) =>
         MessageBox.Show(

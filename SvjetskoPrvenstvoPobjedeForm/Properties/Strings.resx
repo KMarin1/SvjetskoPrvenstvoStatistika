@@ -49,4 +49,13 @@
   <data name="NeocekivanaGreska" xml:space="preserve">
     <value>Dogodila se neočekivana greška.</value>
   </data>
+  <data name="Potvrda" xml:space="preserve">
+    <value>Potvrda</value>
+  </data>
+  <data name="PotvrdaSpremanja" xml:space="preserve">
+    <value>Spremiti postavke?</value>
+  </data>
+  <data name="PotvrdaZatvaranja" xml:space="preserve">
+    <value>Želite li zatvoriti aplikaciju?</value>
+  </data>
 </root>

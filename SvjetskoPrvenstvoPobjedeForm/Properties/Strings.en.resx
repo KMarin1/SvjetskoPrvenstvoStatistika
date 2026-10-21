@@ -49,4 +49,13 @@
   <data name="NeocekivanaGreska" xml:space="preserve">
     <value>An unexpected error occurred.</value>
   </data>
+  <data name="Potvrda" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="PotvrdaSpremanja" xml:space="preserve">
+    <value>Save the settings?</value>
+  </data>
+  <data name="PotvrdaZatvaranja" xml:space="preserve">
+    <value>Do you want to close the application?</value>
+  </data>
 </root>
