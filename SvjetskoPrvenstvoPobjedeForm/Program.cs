@@ -26,7 +26,7 @@ namespace SvjetskoPrvenstvoPobjedeForm
                 Timeout = ApiService.DefaultTimeout,
             };
             var dataSource = DataSourceFactory.Create(settings, httpClient, AppContext.BaseDirectory);
-            Application.Run(new Form1(settings, configService, dataSource));
+            Application.Run(new MainForm(settings, configService, dataSource));
         }
 
         private static UserSettings LoadSettings(ConfigService configService)
