@@ -2,8 +2,6 @@
 using PodatkovniSloj.Config;
 using PodatkovniSloj.Models;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 namespace SvjetskoPrvenstvoPobjedeForm
@@ -26,22 +24,9 @@ namespace SvjetskoPrvenstvoPobjedeForm
             ddlChampionshipType.DataSource = Enum.GetValues<Championship>().Select(c => c.ToApiName()).ToList();
 
             var teams = await apiService.GetTeamsAsync(settings.Championship);
-            var matches = await apiService.GetMatchesAsync(settings.Championship);
-            var repCode = settings.Representation;
-            var firstMatch = matches.FirstOrDefault(m => m.HomeTeam.Code == repCode || m.AwayTeam.Code == repCode);
-            var players = new List<Player>();
-
-            if(firstMatch != null)
-            {
-                var teamStats = firstMatch.HomeTeam.Code == repCode ? firstMatch.HomeTeamStatistics : firstMatch.AwayTeamStatistics;
-                players.AddRange(teamStats.StartingEleven);
-                players.AddRange(teamStats.Substitutes);
-            }
-            //
             cbRepresentation.DataSource = teams;
-            //
 
-            var team = teams.FirstOrDefault(t => string.Equals(t.FifaCode, repCode, StringComparison.OrdinalIgnoreCase));
+            var team = teams.FirstOrDefault(t => string.Equals(t.FifaCode, settings.Representation, StringComparison.OrdinalIgnoreCase));
             if (team != null)
                 cbRepresentation.SelectedItem = team;
 

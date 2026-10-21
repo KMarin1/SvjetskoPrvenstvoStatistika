@@ -58,7 +58,26 @@ public sealed record Match
     public DateTimeOffset? LastScoreUpdateAt { get; init; }
 
     /// <summary>Whether the team with this FIFA code played in the match. Case does not matter.</summary>
-    public bool Involves(string fifaCode) =>
-        string.Equals(HomeTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase)
-        || string.Equals(AwayTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase);
+    public bool Involves(string fifaCode) => IsHome(fifaCode) || IsAway(fifaCode);
+
+    /// <summary>The statistics and line-up of the given team's side.</summary>
+    /// <exception cref="ArgumentException">The team did not play in this match.</exception>
+    public TeamStatistics StatisticsFor(string fifaCode) =>
+        IsHome(fifaCode) ? HomeTeamStatistics
+        : IsAway(fifaCode) ? AwayTeamStatistics
+        : throw NotInMatch(fifaCode);
+
+    /// <summary>The goals, cards and substitutions of the given team's side.</summary>
+    /// <exception cref="ArgumentException">The team did not play in this match.</exception>
+    public IReadOnlyList<TeamEvent> EventsFor(string fifaCode) =>
+        IsHome(fifaCode) ? HomeTeamEvents
+        : IsAway(fifaCode) ? AwayTeamEvents
+        : throw NotInMatch(fifaCode);
+
+    private bool IsHome(string fifaCode) => string.Equals(HomeTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase);
+
+    private bool IsAway(string fifaCode) => string.Equals(AwayTeam.Code, fifaCode, StringComparison.OrdinalIgnoreCase);
+
+    private ArgumentException NotInMatch(string fifaCode) =>
+        new($"{fifaCode} did not play in {HomeTeam.Code}-{AwayTeam.Code}.", nameof(fifaCode));
 }
