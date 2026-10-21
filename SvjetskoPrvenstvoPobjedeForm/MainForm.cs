@@ -2,66 +2,80 @@
 using PodatkovniSloj.Config;
 using PodatkovniSloj.Models;
 using SvjetskoPrvenstvoPobjedeForm.Properties;
-using System;
-using System.Linq;
-using System.Windows.Forms;
 
-namespace SvjetskoPrvenstvoPobjedeForm
+namespace SvjetskoPrvenstvoPobjedeForm;
+
+internal sealed partial class MainForm : Form
 {
-    public partial class MainForm : Form
+    private readonly ConfigService _configService;
+    private readonly IWorldCupDataSource _dataSource;
+    private UserSettings _settings;
+
+    public MainForm(UserSettings settings, ConfigService configService, IWorldCupDataSource dataSource)
     {
-        private readonly ConfigService configService;
-        private UserSettings settings;
-        private readonly IWorldCupDataSource apiService;
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(configService);
+        ArgumentNullException.ThrowIfNull(dataSource);
 
-        public MainForm(UserSettings settings, ConfigService configService, IWorldCupDataSource apiService)
+        InitializeComponent();
+        _settings = settings;
+        _configService = configService;
+        _dataSource = dataSource;
+        ddlChampionshipType.Format += (_, e) =>
         {
-            InitializeComponent();
-            this.settings = settings;
-            this.apiService = apiService;
-            this.configService = configService;
-            ApplyTexts();
-        }
-
-        private async void MainForm_Load(object sender, EventArgs e)
-        {
-            ddlCulture.DataSource = UserSettings.SupportedCultures.ToList();
-            ddlChampionshipType.DataSource = Enum.GetValues<Championship>().Select(c => c.ToApiName()).ToList();
-
-            var teams = await apiService.GetTeamsAsync(settings.Championship);
-            cbRepresentation.DataSource = teams;
-
-            var team = teams.FirstOrDefault(t => string.Equals(t.FifaCode, settings.Representation, StringComparison.OrdinalIgnoreCase));
-            if (team != null)
-                cbRepresentation.SelectedItem = team;
-
-            ddlChampionshipType.SelectedItem = settings.Championship.ToApiName();
-            ddlCulture.SelectedItem = settings.Culture;
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            ChampionshipExtensions.TryParseApiName(ddlChampionshipType.SelectedItem as string, out var championship);
-            settings = settings with
+            if (e.ListItem is Championship championship)
             {
-                Championship = championship,
-                Culture = (string)ddlCulture.SelectedItem,
-                Representation = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode,
-            };
-            configService.Save(settings);
-            UiCulture.Apply(settings.Culture);
-            ApplyTexts();
-            MessageBox.Show(Strings.PostavkeSpremljene, Strings.Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Value = championship.ToApiName();
+            }
+        };
+        ApplyTexts();
+    }
+
+    private async void MainForm_Load(object? sender, EventArgs e)
+    {
+        ddlCulture.DataSource = UserSettings.SupportedCultures.ToList();
+        ddlCulture.SelectedItem = _settings.Culture;
+        ddlChampionshipType.DataSource = Enum.GetValues<Championship>();
+        ddlChampionshipType.SelectedItem = _settings.Championship;
+
+        var teams = await _dataSource.GetTeamsAsync(_settings.Championship);
+        cbRepresentation.DataSource = teams.ToList();
+
+        var savedTeam = teams.FirstOrDefault(
+            team => string.Equals(team.FifaCode, _settings.Representation, StringComparison.OrdinalIgnoreCase));
+        if (savedTeam is not null)
+        {
+            cbRepresentation.SelectedItem = savedTeam;
+        }
+    }
+
+    private void btnSubmit_Click(object? sender, EventArgs e)
+    {
+        if (ddlChampionshipType.SelectedItem is not Championship championship
+            || ddlCulture.SelectedItem is not string culture)
+        {
+            return;
         }
 
-        /// <summary>Sets every visible text from the resources of the current UI culture.</summary>
-        private void ApplyTexts()
+        _settings = _settings with
         {
-            Text = Strings.Naslov;
-            lblCulture.Text = Strings.Jezik;
-            lblChampionshipType.Text = Strings.Prvenstvo;
-            lblRepresentation.Text = Strings.Reprezentacija;
-            btnSubmit.Text = Strings.Spremi;
-        }
+            Championship = championship,
+            Culture = culture,
+            Representation = (cbRepresentation.SelectedItem as TeamResult)?.FifaCode,
+        };
+        _configService.Save(_settings);
+        UiCulture.Apply(_settings.Culture);
+        ApplyTexts();
+        MessageBox.Show(this, Strings.PostavkeSpremljene, Strings.Info, MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    /// <summary>Sets every visible text from the resources of the current UI culture.</summary>
+    private void ApplyTexts()
+    {
+        Text = Strings.Naslov;
+        lblCulture.Text = Strings.Jezik;
+        lblChampionshipType.Text = Strings.Prvenstvo;
+        lblRepresentation.Text = Strings.Reprezentacija;
+        btnSubmit.Text = Strings.Spremi;
     }
 }
